@@ -69,3 +69,4 @@ and DOOM.
 - Engine core (game loop, camera, scene)
 -adding some utilities, rendering some geometry
 - Messaging system
+-DataManager ("global" data storage)

@@ -1,4 +1,4 @@
-import {WebGLRenderer, WebGLRendererParameters} from "three";
+import {Color, WebGLRenderer, WebGLRendererParameters} from "three";
 
 export class Renderer {
     private _internal: WebGLRenderer;
@@ -8,5 +8,15 @@ export class Renderer {
             canvas: canvasElement
         };
         this._internal = new WebGLRenderer( params );
+
+        this._internal.setClearColor( new Color( 0.8, 0.8, 1 ) );
+    }
+
+    public update( dt: number ): void {
+        this._internal.clear();
+    }
+
+    public OnResize( width: number, height: number): void {
+        this._internal.setSize( width, height );
     }
 }

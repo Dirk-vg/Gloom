@@ -65,3 +65,5 @@ and DOOM.
 
 ## Done So far:
 - Project bootstrapping
+- improved Build system
+- Game loop

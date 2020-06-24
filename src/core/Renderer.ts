@@ -1,7 +1,9 @@
-import {Color, WebGLRenderer, WebGLRendererParameters} from "three";
+import {Camera, Color, Scene, WebGLRenderer, WebGLRendererParameters} from "three";
 
 export class Renderer {
     private _internal: WebGLRenderer;
+    private width: Scene;
+    private height: Camera;
 
     public constructor(canvasElement: HTMLCanvasElement) {
         let params: WebGLRendererParameters = {
@@ -14,6 +16,10 @@ export class Renderer {
 
     public update( dt: number ): void {
         this._internal.clear();
+    }
+
+    public Render( dt: number, scene: Scene, camera: Camera ): void {
+        this._internal.render( scene, camera);
     }
 
     public OnResize( width: number, height: number): void {

@@ -1,5 +1,8 @@
 import { Renderer } from "./Renderer";
 import * as Box2D from "@flyover/box2d"
+import {Color, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene} from "three";
+
+
 
 export class Engine {
 
@@ -10,6 +13,10 @@ export class Engine {
     private _gameTime: number = 0;
 
     private _physicsWorld: Box2D.b2World;
+
+    // TODO: These
+    private _camera: PerspectiveCamera;
+    private _scene: Scene;
 
     public constructor( canvas: HTMLCanvasElement, gameArea: HTMLDivElement ) {
         this._viewport = canvas;
@@ -40,6 +47,16 @@ export class Engine {
 
         // Call the resize routine manually once to set everything correctly.
         this.onWindowResize();
+        // TODO: move this
+        this._camera = new PerspectiveCamera( 45, this._aspect, 0.1, 1000 );
+        this._camera.position.set( 0, 0, 2);
+
+        this._scene = new Scene();
+        // Test geometry
+        let geometry = new PlaneGeometry(1, 1, 1, 1 );
+        let material = new MeshBasicMaterial({ color: new Color( "#FF6600" ) } );
+        let mesh = new Mesh( geometry, material );
+        this._scene.add( mesh );
 
         // Kick off loop.
         this.loop( 0 );
@@ -47,6 +64,7 @@ export class Engine {
 
     private update( dt: number ): void {
         this._renderer.update( dt );
+        this._renderer.Render(dt, this._scene, this._camera);
     }
 
     private loop( gameTime: number ): void {

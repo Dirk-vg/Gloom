@@ -66,4 +66,5 @@ and DOOM.
 ## Done So far:
 - Project bootstrapping
 - improved Build system
-- Game loop
+- Engine core (game loop, camera, scene)
+-adding some utilities, rendering some geometry

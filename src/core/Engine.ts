@@ -1,6 +1,7 @@
 import { Renderer } from "./Renderer";
 import * as Box2D from "@flyover/box2d"
 import {Color, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene} from "three";
+import {InputManager} from "./InputManager";
 
 
 
@@ -28,6 +29,8 @@ export class Engine {
     public Start(width: number, height: number): void {
 
         console.log("started!");
+
+        InputManager.Initialize(this._viewport);
 
         // Set canvas to specified physical size
         this._viewport.width = width;

@@ -2,21 +2,23 @@ import {PerspectiveCamera, Scene, PlaneGeometry, MeshBasicMaterial, Color, Mesh,
 import {Message} from "./Message";
 import {InputEventMessage} from "./core/InputEventMessage";
 import {IMessageHandler} from "./IMessageHandler";
-import * as Box2D from "@flyover/box2d";
+
 import {InputManager} from "./core/InputManager";
 import {TMath} from "./core/TMath";
+import {Level} from "./Level";
 
 export class Game implements IMessageHandler{
 
 
     private _camera: PerspectiveCamera;
-    private _scene: Scene;
+
 
     // TODO: These
     private _angle: number = 0;
     private _movementSpeed: number = 5;
+    private _level: Level;
 
-    private _physicsWorld: Box2D.b2World;
+
 
     public constructor() {
     }
@@ -25,8 +27,8 @@ export class Game implements IMessageHandler{
         return this._camera;
     }
 
-    public get ActiveScene(): Scene {
-        return this._scene;
+    public get ActiveLevel(): Level {
+        return this._level;
     }
 
     public OnStartup( aspect: number ): void {
@@ -38,14 +40,8 @@ export class Game implements IMessageHandler{
     }
 
     public StartNew(): void {
-        this._scene = new Scene();
-        // Test geometry
-        let geometry = new PlaneGeometry(1, 1, 1, 1 );
-        let material = new MeshBasicMaterial({ color: new Color( "#ff6600" ) } );
-        let mesh = new Mesh( geometry, material );
-        this._scene.add( mesh );
-
-        this._physicsWorld = new Box2D.b2World( new Box2D.b2Vec2( 0, 0) );
+        this._level = new Level();
+        this._level.Load();
     }
 
     public Update( dt: number ): void {

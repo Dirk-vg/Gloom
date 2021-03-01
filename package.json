@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@flyover/box2d": "^1.0.1",
-    "three": "^0.117.1",
+    "three": "^0.125.0",
     "ts-loader": "^7.0.5"
   }
 }
